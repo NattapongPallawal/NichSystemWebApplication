@@ -1,0 +1,25 @@
+<p mat-dialog-title style="font-family: 'Prompt', sans-serif;">ลบพนักงาน</p>
+<div mat-dialog-content>
+  <div style="background-color: rgba(255, 134, 134, 0.336); width: 100% ;padding: 8px; padding-left: 16px; padding-right: 16px; border-radius: 10px;">
+
+    <p style="color: rgb(228, 53, 53);">
+      <mat-icon>warning</mat-icon> &nbsp;
+      เมื่อคุณลบพนักงานคนนี้ออก พนักงานคนนี้จะถูกลบออกอย่างถาวร <br> และไม่สามารถยกเลิกการลบได้
+    </p>
+
+  </div>
+  <br>
+  <p style="color:rgb(104, 104, 104); padding-bottom: 16px;">คุณต้องการลบพนักงานคนนี้ออกหรือไม่? </p>
+  <p>
+    <span style="color:rgb(104, 104, 104); ">ชื่อ</span> {{user.firstName}} {{user.lastName}} <br>
+    <span style="color:rgb(104, 104, 104); ">ตำแหน่ง</span> {{user.department}}
+  </p>
+
+</div>
+<br>
+<div style="text-align: right;">
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>ไม่ใช่</button>
+  <button mat-button color="warn" (click)="remove()">ตกลง</button>
+</div>
+
+<!-- [mat-dialog-close]="data.animal" -->

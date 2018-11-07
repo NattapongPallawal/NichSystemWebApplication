@@ -1,0 +1,29 @@
+mat-grid-tile {
+    /* background:lightblue; */
+    padding: 8px;
+}
+.example-container {
+  height: 350px;
+  margin: 16px;
+  overflow: auto;
+  
+}
+
+table {
+  width: 100%;
+ 
+}
+
+.mat-card1:hover {
+    background:rgba(0,0,0,.04);
+  }
+  
+  .mat-card1 .last-child {
+    margin-bottom: 0;
+   
+  }
+ /*  .mat-card1:checked{
+    background: rebeccapurple;
+  }
+   */
+  

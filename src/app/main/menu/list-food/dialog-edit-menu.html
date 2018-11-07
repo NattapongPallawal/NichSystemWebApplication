@@ -1,0 +1,113 @@
+<div style="font-size: 25px; text-align: center; margin-top: 8px;line-height: 40pt; position: relative;">
+    <button mat-icon-button [mat-dialog-close]="true" style="position: absolute; right: 0%; top: auto; bottom: auto;">
+        <mat-icon style="color: #848484">close</mat-icon>
+    </button>
+    <p style="padding: 16px; text-align: center; color: #0F2027; font-weight: bold; font-size: 22px;">รายละเอียดเมนู</p>
+    <mat-progress-bar mode="indeterminate" *ngIf="isUploading" style="margin-bottom: 16px;"></mat-progress-bar>
+</div>
+
+
+<mat-dialog-content id="style-2" style="text-align: center;">
+
+    <table style="width: 100%;">
+
+        <tr>
+            <td style="width: 25%; padding: 8px;">
+                <mat-slide-toggle (click)="changeAvailable(!menu.available)" color = "warn" [checked] ="menuAvailable">{{menu.available ? 'สั่งได้':'ของหมด'}}</mat-slide-toggle>
+                &nbsp;&nbsp;&nbsp;<button mat-flat-button color="warn" (click)="deleteMenu()">ลบ</button>
+                <input hidden type="file" #inputFile (change)="detectFiles($event)">
+                <img src={{menu.picture}} style=" margin: 16px; object-fit: cover;border-radius: 10px; width: 80%; vertical-align:middle; ">
+                
+                <button mat-icon-button style="position: absolute;" type="button" (click)="inputFile.click()" color="warn">
+                    <mat-icon>publish</mat-icon>
+                </button>
+
+                <p style="font-size: 18px;font-weight: bold; margin-bottom: 8px; margin-top: 16px;">{{menu.foodName}}</p>
+                <p style="font-size: 14px;">{{menu.type}}</p>
+                <br>
+                <mat-form-field style="width: 80%;text-align: center; ">
+                    <mat-label>ราคา</mat-label>
+                    <input matInput type="number" [(ngModel)]="menu.price" (change)="upDatePrice()">
+                </mat-form-field>
+            </td>
+            <td style="width: 40%;  padding: 8px;">
+                <form [formGroup]="formIngredient" autocomplete="off">
+                    <mat-form-field style="width: 80% ">
+                        <input matInput placeholder="ชื่อวัตถุดิบ" formControlName="ingredientName">
+                    </mat-form-field>
+                    <mat-form-field style="width: 80% ">
+                        <input matInput type="number" placeholder="ราคา ฿" formControlName="ingredientPrice">
+                    </mat-form-field>
+                    <br>
+
+                    <button mat-icon-button type="button" color="warn" (click)="addIngredient()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+
+                </form>
+                <mat-divider>
+                </mat-divider>
+                <div id="style-2" style="width: 100%;height: 250px; overflow: auto;">
+                    <table class="w3-table w3-bordered">
+                        <tr>
+                            <td style="font-size: 16px; color: #4F4F4F">ลำดับ</td>
+                            <td style="font-size: 16px; color: #4F4F4F">วัตถุดิบ</td>
+                            <td style="font-size: 16px; color: #4F4F4F">ราคา</td>
+                            <td style="font-size: 16px; text-align: center; color: #4F4F4F">#</td>
+                        </tr>
+                        <tr *ngFor="let item of ingredient ; index as i ">
+                            <td>{{i+1}}</td>
+                            <td>{{item.ingredientName}} </td>
+                            <td>{{item.price}}</td>
+                            <td class="iconRemove" (click)="removeIngredient(item)" style="text-align: center; ">
+                                <mat-icon style="padding: 0px; font-size:22px; color: tomato;">delete
+                                </mat-icon>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td style="width: 35%;  padding: 8px;">
+                <form [formGroup]="formSizeMenu" autocomplete="off">
+                    <mat-form-field style="width: 80% ">
+                        <input matInput placeholder="ขนาด" formControlName="size">
+                    </mat-form-field>
+                    <mat-form-field style="width: 80% ">
+                        <input matInput type="number" placeholder="ราคา ฿" formControlName="price">
+                    </mat-form-field>
+                    <br>
+
+                    <button mat-icon-button type="button" color="warn" (click)="addSizeMenu()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+
+                </form>
+                <mat-divider>
+                </mat-divider>
+                <div id="style-2" style="width: 100%;height: 250px; overflow: auto;">
+                    <table class="w3-table w3-bordered">
+                        <tr>
+                            <td style="font-size: 16px; color: #4F4F4F">ลำดับ</td>
+                            <td style="font-size: 16px; color: #4F4F4F">ขนาด</td>
+                            <td style="font-size: 16px; color: #4F4F4F">ราคา</td>
+                            <td style="font-size: 16px; text-align: center; color: #4F4F4F">#</td>
+                        </tr>
+                        <tr *ngFor="let item of sizeMenus ; index as i ">
+                            <td>{{i+1}}</td>
+                            <td>{{item.size}} </td>
+                            <td>{{item.price}}</td>
+                            <td class="iconRemove" (click)="removeSizeMenu(item)" style="text-align: center; ">
+                                <mat-icon style="padding: 0px; font-size:22px; color: tomato;">delete
+                                </mat-icon>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+
+
+
+</mat-dialog-content>

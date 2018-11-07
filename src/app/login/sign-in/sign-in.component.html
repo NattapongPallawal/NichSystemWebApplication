@@ -1,0 +1,52 @@
+<div class="container-login100">
+
+  <mat-card class="class.mat-elevation-z0" style="width:80%; border-radius: 25px; ">
+    <table class="example-full-width">
+      <tr>
+        <td style="width:30%;">
+          <img *ngIf="!isSignin" src="https://firebasestorage.googleapis.com/v0/b/restaurant-system-9c921.appspot.com/o/System%2Fimg-01.png?alt=media&token=cd764451-42e9-45c4-9ef7-15cd2bd6142c"
+            alt="" style="margin: 16px;">
+          <div *ngIf="isSignin" style="width: 100%;  ">
+            <mat-spinner style="margin: auto;"></mat-spinner>
+          </div>
+
+        </td>
+        <td style=" text-align: center;">
+          <div>
+            <br><br>
+            <p style="font-size:36px; margin-bottom: 16px; font-weight: bold; color: #203A43;">
+              Nich System
+            </p>
+            <form class="example-form" [formGroup]="formLogin" autocomplete="on" (ngSubmit)="login()">
+              <mat-form-field class="example-full-width">
+                <input matInput formControlName="email" placeholder="อีเมล">
+                <mat-error *ngIf="!formLogin.controls.email.valid">
+                  กรุณาป้อนอีเมลให้ถูกต้อง
+                </mat-error>
+
+              </mat-form-field>
+              <br>
+              <mat-form-field class="example-full-width">
+                <input matInput type="password" formControlName="password" placeholder="รหัสผ่าน">
+                <mat-error *ngIf="!formLogin.controls.password.valid">
+                  รหัสผ่านต้องมากกว่า 5 ตัว
+                </mat-error>
+              </mat-form-field>
+              <p style="text-align: end; color: #203A43;" hidden class="c1">ลืมรหัสผ่าน</p>
+              <br>
+              <button type="submit" mat-flat-button class="btn">เข้าสู่ระบบ</button>
+            </form>
+          </div>
+          <br><br><br>
+          <div (click)="register()" routerLink="/register" routerLinkActive="active" class="center" style="margin: 16x; text-align: center;height: 100%;">
+            <p>หากยังไม่เป็นสมาชิก <mat-icon style="font-size: 30px; height: 100%;">arrow_right_alt</mat-icon>
+            </p>
+          </div>
+
+
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+
+</div>

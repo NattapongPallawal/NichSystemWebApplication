@@ -1,0 +1,122 @@
+<div style="height:auto; padding:10px ;margin: auto">
+  <mat-grid-list cols="3" rowHeight="1:1">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="class.mat-elevation-z0" style="width: 95%;height: 95%; border-radius: 10px; ">
+
+        <div style="text-align: center">
+          <div style="font-size: 25px">{{restaurant.restaurantName}}</div> <br>
+          <div>
+            <img src="{{restaurant.picture}}" style=" width: 100%; padding: 3px;; object-fit: cover">
+            <mat-progress-bar mode="indeterminate" *ngIf="isUpload"></mat-progress-bar>
+          </div>
+          <br><br>
+          <div class="w3-display-topright" style="margin:16px;">
+            <button mat-icon-button (click)="inputFile.click()">
+              <mat-icon style="color: #848484">publish</mat-icon>
+            </button>
+            <input hidden type="file" #inputFile (change)="detectFiles($event)">
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="class.mat-elevation-z0" style="height: 95%;width: 95%;border-radius: 10px;">
+        <div class="w3-display-topright" style="margin:16px;">
+          <button mat-icon-button (click)="updateContact(about.value,promtPayID.value)">
+            <mat-icon style="color: #848484">{{iconAbout}}</mat-icon>
+          </button> </div>
+
+        <div style="font-size: 20px">เกี่ยวกับ</div>
+        <div>
+          <br>
+          <mat-form-field class="example-full-width">
+            <textarea #about matInput placeholder="คำอธิบาย" value={{restaurant.about}} disabled={{isAbout}}></textarea>
+          </mat-form-field>
+        </div>
+        <div style="font-size: 20px">ช่องทางการชำระเงิน</div>
+        <br>
+
+        <mat-form-field class="example-full-width">
+          <input #promtPayID matInput pattern="(^0[0-9]{9}$)|(^[0-9]{13}$)" required placeholder="พร้อมเพย์" disabled={{isAbout}}
+            value={{restaurant.promtPayID}}>
+        </mat-form-field>
+        <div style="font-size: 20px">เวลาที่ให้บริหาร</div>
+        <br>
+
+        <mat-form-field class="example-full-width">
+          <input #promtPayID matInput pattern="(^0[0-9]{9}$)|(^[0-9]{13}$)" required placeholder="เวลาเปิด-ปิดร้านอาหาร" disabled={{isAbout}}
+            value={{restaurant.times}}>
+        </mat-form-field>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <mat-card class="class.mat-elevation-z0" style="width: 95%; border-radius: 10px;margin-top: 2%; margin-bottom:auto;">
+        <div style="font-size: 20px">ข้อมูลการติดต่อ</div>
+        <br>
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="ติดต่อคุณ" disabled value="{{restaurantOwner.firstName}} {{restaurantOwner.lastName}}">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="โทรศัพท์" disabled value={{restaurantOwner.phoneNumber}}>
+          </mat-form-field>
+        </form>
+
+
+        <form class="example-form" novalidate [formGroup]="formAddress" (ngSubmit)="updateAddress()">
+          <div style="font-size: 20px">ที่อยู่ร้าน
+            <button mat-icon-button type="submit">
+              <mat-icon style="color: #848484">{{iconAddress}}</mat-icon>
+            </button>
+          </div>
+          <br>
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="address" placeholder="ที่อยู่">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="subDistrict" placeholder="ตำบล/แขวง">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="district" placeholder="อำเภอ/เขต">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="province" placeholder="จังหวัด">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="postalCode" placeholder="รหัสไปรษณีย์">
+          </mat-form-field>
+        </form>
+
+
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-card class="class.mat-elevation-z0" style="height: 95%; width: 98%; border-radius: 10px;">
+        <div class="w3-display-topright" style="margin:16px;">
+          <button mat-icon-button style="margin-right:16px;" *ngIf="isMaps" (click)="getUserLocation()">
+            <mat-icon style="color: #848484">my_location</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onClickEditMaps()">
+            <mat-icon style="color: #848484">{{iconMaps}}</mat-icon>
+          </button>
+        </div>
+
+        <div style="font-size: 20px ;margin-bottom: 16px;">Maps</div>
+
+        <agm-map [zoom]="17" [latitude]="latitude" [longitude]="longitude" (mapClick)="onChoseLocation($event)">
+          <agm-marker [latitude]="latitude" [longitude]="longitude" *ngIf="locationChosen">
+            <agm-info-window>
+              <h3><strong>{{restaurant.restaurantName}}</strong></h3>
+
+              <p>{{restaurant.about}}</p>
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

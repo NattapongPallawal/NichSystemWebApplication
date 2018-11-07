@@ -1,0 +1,117 @@
+<div style="font-size: 25px; text-align: center; margin-top: 8px;line-height: 40pt; position: relative;">
+    <button mat-icon-button [mat-dialog-close]="true" style="position: absolute; right: 0%; top: auto; bottom: auto;">
+        <mat-icon style="color: #848484">close</mat-icon>
+    </button>
+    <p style="padding: 16px; text-align: center; color: #0F2027; font-weight: bold; font-size: 22px;">เพิ่มร้านอาหารของคุณ</p>
+</div>
+<br>
+<mat-dialog-content id="style-2" style="text-align: center;">
+    <mat-horizontal-stepper [linear]="isLinear">
+        <mat-step label="ข้อมูลร้าน" [stepControl]="formRastaurantInfo">
+            <form [formGroup]="formRastaurantInfo" autocomplete="off">
+                <mat-form-field style="width: 48%; padding-right: 8px;">
+                    <input matInput type="text" formControlName="restaurantName" placeholder="ชื่อร้านอาหาร">
+                </mat-form-field>
+
+                <mat-form-field style="width: 50%;">
+                    <input matInput type="tel" formControlName="phoneNumber" placeholder="เบอร์โทรศัพท์">
+                </mat-form-field>
+                <br>
+                <mat-form-field style="width: 98%;">
+                    <input matInput type="text"  formControlName="time" placeholder="เวลาเปิด-ปิดร้านอาหาร ตัวอย่าง 08:00 - 18:00 ">
+                </mat-form-field><!--  formControlName="about" -->
+                <br>
+                <mat-form-field style="width: 98%;">
+                    <textarea matInput formControlName="about" placeholder="เกี่ยวกับร้านอาหาร"></textarea>
+                </mat-form-field>
+                <br>
+                <br>
+                <div>
+                    <button mat-button matStepperNext>ถัดไป</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step label="ขอพร้อมเพย์" [stepControl]="formRastaurantPromtPay">
+            <form [formGroup]="formRastaurantPromtPay" autocomplete="off">
+                <mat-form-field style="width: 98%;">
+                    <input matInput formControlName="promtPayID" placeholder="หมายเลขพร้อยเพย์">
+                </mat-form-field>
+                <br>
+                <br>
+                <p style="font-size: 14px; text-align: left; color: #999999;"> <b>&ensp;พร้อมเพย์</b>
+                    เป็นบริการทางเลือกใหม่ให้ประชาชน ธุรกิจ และหน่วยงานต่าง​ๆ ใช้ในการโอนเงินและรับเงิน
+                    เป็นบริการเพิ่มจากการโอนเงินแบบเดิม ที่ให้ประชาชนเลือกใช้ได้และทำให้ผู้ใช้มีความสะดวกมากขึ้น
+                    เพราะระบบพร้อมเพย์จะใช้เลขประจำตัวประชาชน
+                    หรือ หมายเลขโทรศัพท์มือถือของผู้รับเงินแทนได้ ทำให้สะดวกแล​ะง่ายต่อการจดจำ
+                    จากเดิมที่ต้องรู้เลขที่บัญชีเงินฝากธนาคารจึงจะโอนเงินให้ได้
+                </p>
+                <br>
+                <br>
+                <div>
+                    <button mat-button matStepperPrevious>ย้อนกลับ</button>
+                    <button mat-button matStepperNext>ถัดไป</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step label="ร้านอยู่ที่ไหน" [stepControl]="formRastaurantAddress">
+            <form [formGroup]="formRastaurantAddress" autocomplete="off">
+
+                <mat-form-field style="width: 98%;">
+                    <input matInput formControlName="address" placeholder="ที่อยู่">
+                </mat-form-field>
+                <mat-form-field style="width: 48%;  padding-right: 8px;">
+                    <input matInput formControlName="subDistrict" placeholder="ตำบล">
+                </mat-form-field>
+                <mat-form-field style="width: 50%;">
+                    <input matInput formControlName="district" placeholder="อำเภอ">
+                </mat-form-field>
+                <mat-form-field style="width: 48%;  padding-right: 8px;">
+                    <input matInput formControlName="province" placeholder="จังหวัด">
+                </mat-form-field>
+                <mat-form-field style="width:50%;">
+                    <input matInput type="number" formControlName="postalCode" placeholder="รหัสไปรษณีย์">
+                </mat-form-field>
+                <mat-divider> </mat-divider>
+                <br>
+                <mat-form-field style="width:50%;">
+                    <input matInput formControlName="longitude" placeholder="ลองจิจูด">
+                </mat-form-field>
+                <mat-form-field style="width:50%;">
+                    <input matInput formControlName="latitude" placeholder="ลองติจูด">
+                </mat-form-field>
+                <agm-map style=" height:300px;" [zoom]="17" [latitude]="latitude" [longitude]="longitude" (mapClick)="onChoseLocation($event)">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude">
+                        <!-- <agm-info-window>
+                            <h3><strong>{{restaurant.restaurantName}}</strong></h3>
+*ngIf="locationChosen"
+                            <p>{{restaurant.about}}</p>
+                        </agm-info-window> -->
+                    </agm-marker>
+                </agm-map>
+                <br>
+                <br>
+                <div>
+                    <button mat-button matStepperPrevious>ย้อนกลับ</button>
+                    <button mat-button matStepperNext>ถัดไป</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step label="รูปภาพร้าน" [stepControl]="formRastaurantPicture">
+            <mat-progress-bar mode="indeterminate" *ngIf="isUploading"></mat-progress-bar><!-- *ngIf="isUpload" -->
+
+            <img src={{formRastaurantPicture.value.picture}} style=" height: 250px; margin: 8px;; object-fit: cover">
+
+            <button style="width: 50%; margin-top: 16px;" mat-button (click)="inputFile.click()" [disabled]="isUploading">
+                <mat-icon style="color: #848484">publish</mat-icon>เลือกรูปภาพ
+            </button>
+            <input hidden type="file" #inputFile (change)="detectFiles($event)">
+
+            <br>
+            <br>
+            <div>
+                <button mat-button matStepperPrevious [disabled]="isUploading">ย้อนกลับ</button>
+                <button mat-flat-button color="warn" (click)="uploadData()" [disabled]="isUploading">เพิ่มร้านอาหาร</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</mat-dialog-content>

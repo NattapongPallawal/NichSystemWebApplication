@@ -1,0 +1,115 @@
+<div class="container-login100">
+  <mat-card style="width:60%; border-radius: 10px; " class="class.mat-elevation-z0">
+
+    <p style="font-size:24px; text-align: center">ข้อมูลส่วนตัว</p>
+    <br>
+    <table  class="table1">
+      <tr>
+        <td style="width: 30%; vertical-align: text-top; padding: 8px;">
+          <div style="width: 100%; height: 100%; padding-top:18px ;">
+            <img src={{formPersonalInfo.value.picture}} style=" object-fit: cover ;height: 100%; width: 100%; border-radius: 10px;" />
+            <mat-progress-bar mode="indeterminate" *ngIf="isUpload"></mat-progress-bar>
+          </div>
+          <br>
+          <input hidden type="file" #inputFile (change)="detectFiles($event)">
+          <button mat-stroked-button (click)="inputFile.click()" color="warn">อัพโหลดรูปภาพ</button>
+        </td>
+
+        <td style="width: 70%; padding:  8px;">
+          <form [formGroup]="formPersonalInfo" (ngSubmit)="updatePersonalInfo()">
+            <table style="width: 100%;">
+              <!--   <tr>
+                <td colspan="2"> -->
+              <div class="w3-display-topright">
+                <button mat-icon-button type="submit" style="margin:16px">
+                  <mat-icon style="color: #848484">{{editIcon}}</mat-icon>
+                </button>
+              </div>
+              <!--  </td>
+              </tr> -->
+              <tr>
+                <td style="width:50%;">
+                  <mat-form-field style="width: 100% ;font-size: 14px;">
+                    <input matInput placeholder="ชื่อ" formControlName="firstName">
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field style="width: 100%">
+                    <input matInput placeholder="นามสกุล" formControlName="lastName">
+                  </mat-form-field>
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field style="width: 100%">
+                    <input matInput placeholder="วันเกิด" [matDatepicker]="picker" formControlName="birthday">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field style="width: 100%">
+                    <input matInput placeholder="เลขบัตรประชาชน" formControlName="personID">
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field style="width: 100%">
+
+                    <input matInput placeholder="เบอร์โทรศัพท์" formControlName="phoneNumber">
+
+                  </mat-form-field>
+                </td>
+              </tr>
+              <!--  <tr>
+                <td colspan="2">
+                  <div style="text-align: left">
+                    ที่อยู่
+                  </div>
+                </td>
+              </tr> -->
+
+              <tr>
+                <td colspan="2">
+                  <mat-form-field style="width:100%;">
+                    <textarea matInput placeholder="ที่อยู่" formControlName='address'></textarea>
+                  </mat-form-field>
+                </td>
+
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field style="width:100%;">
+                    <input matInput placeholder="ตำบล/แขวง" formControlName="subDistrict">
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field style="width:100%;">
+                    <input matInput placeholder="อำเภอ/เขต" formControlName="district">
+                  </mat-form-field>
+                </td>
+
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field style="width:100%;">
+                    <input matInput placeholder="จังหวัด" formControlName="province">
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field style="width:100%;">
+                    <input matInput placeholder="รหัสไปรษณีย์" formControlName="postalCode">
+                  </mat-form-field>
+                </td>
+              </tr>
+
+            </table>
+          </form>
+        </td>
+      </tr>
+    </table>
+
+  </mat-card>
+</div>

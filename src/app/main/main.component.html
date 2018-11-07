@@ -1,0 +1,237 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar style="background: #16222A;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #3A6073, #16222A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #3A6073, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;"
+    class="example-toolbar">
+    <!-- <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>-->
+    <p style=" margin-left: 8px; font-size: 24px; font-weight: bold;">Nich System</p>
+    <span class="example-spacer"></span>
+    <p *ngIf="!isAdmin" style="padding-right: 24px; font-size: 18px;">ร้าน{{resNameCurrent}}</p>
+    <p *ngIf="!isAdmin" style=" text-align: center; padding-right: 16px; padding-left: 16px; background-color:rgba(22, 34, 42, 0.466); border-radius:25px;">
+      ตำแหน่ง{{user.department}}</p>
+    <button *ngIf="isAdmin" mat-button [matMenuTriggerFor]="menuRes" style="border-radius: 50px; margin: 16px; height: 50px;">
+      ร้าน {{resNameCurrent}}
+      <mat-icon>expand_more</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="menu" style="border-radius: 50px; margin: 16px; height: 50px;">
+      <img src={{user.picture}} style="object-fit: cover;border-radius: 50%; width: 40px;height: 40px; vertical-align:middle; ">
+      สวัสดี! {{user.firstName}}
+      <mat-icon>expand_more</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="noti.toggle()">
+      <mat-icon matBadge={{readNotiCount}} matBadgeColor="warn">notifications</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/home/personal-info" routerLinkActive="active">
+        <mat-icon>person</mat-icon> <span>ข้อมูลส่วนตัว</span>
+      </button>
+      <button *ngIf="isAdmin" mat-menu-item routerLink="/home/employee-access" routerLinkActive="active">
+        <mat-icon>people</mat-icon> <span>จัดการสิทธิพนักงาน</span>
+      </button>
+      <button mat-menu-item (click)="onClickLogout()">
+        <mat-icon>input</mat-icon> <span>ออกจากระบบ</span>
+      </button>
+    </mat-menu>
+
+
+    <mat-menu #menuRes="matMenu">
+      <div *ngFor="let item of resNameList">
+        <button mat-menu-item (click)="selectRestaurant(item.key)">
+          <mat-icon>store_mall_directory</mat-icon>
+          <span>{{item.restaurantName}}</span>
+        </button>
+      </div>
+      <button mat-menu-item (click)="addReataurant()">
+        <mat-icon>add</mat-icon> <span>เพิ่มร้านอาหาร</span>
+      </button>
+    </mat-menu>
+
+
+
+  </mat-toolbar>
+
+  <mat-sidenav-container style="overflow: hidden" class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+
+    <mat-sidenav #snav [mode]="'side'" fixedTopGap="56" disableClose opened style="width :155px;">
+      <!-- [fixedInViewport]="mobileQuery.matches" -->
+      <!-- <div style="height: 150px; background-color: blue; position:relative;">
+         <img src="src\assets\picture\login-bg.svg"> 
+          <img class="corrner">
+  
+        </div>-->
+      <div id="style-2" style="background:rgb(31, 77, 92); ; 
+        color: white; overflow: auto; height: 100%;">
+
+
+        <table style="margin-right: auto;margin-left: auto;">
+          <tr *ngIf="user.department === 'พนักงานเสริฟ' || user.department === 'แคชเชียร์' || user.department === 'พนักงานในครัว' || isAdmin"
+            style="padding-top: 16px;">
+            <td>
+              <div style="text-align: center;">
+                <button mat-button style="width:100%" routerLink="/home/dashboard" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">home</mat-icon>
+                  <p style="line-height:25pt ">หน้าแรก
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="user.department === 'พนักงานในครัว' || isAdmin">
+            <td>
+              <div style="text-align: center; padding-top: 16px;">
+                <button mat-button style="width:100%" routerLink="/home/order" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">reorder</mat-icon>
+                  <p style="line-height:25pt ">ออเดอร์ลูกค้า
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="user.department === 'พนักงานเสริฟ' || isAdmin">
+            <td>
+              <div style="text-align: center; padding-top: 16px;">
+                <button mat-button style="width:100%" routerLink="/home/serve" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">send</mat-icon>
+                  <p style="line-height:25pt ">เสริฟ
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="user.department === 'แคชเชียร์' || isAdmin">
+            <td>
+              <div style="text-align: center; padding-top: 16px;">
+                <button mat-button style="width:100%" routerLink="/home/payment" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">payment</mat-icon>
+                  <p style="line-height:25pt ">ชำระเงิน
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="user.department === 'แคชเชียร์' || user.department === 'พนักงานในครัว'|| isAdmin">
+            <td>
+              <div style="text-align: center; padding-top: 16px;">
+                <button mat-button style="width:100%" routerLink="/home/order-history" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">history</mat-icon>
+                  <p style="line-height:25pt ">ประวิติออเดอร์
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="user.department === 'พนักงานในครัว' || isAdmin">
+            <td>
+              <div style="text-align: center; padding-top: 16px;">
+                <button mat-button style="width:100%" routerLink="/home/list-food" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">restaurant_menu</mat-icon>
+                  <p style="line-height:25pt ">รายการอาหาร
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="user.department === 'พนักงานในครัว' || isAdmin">
+            <td>
+              <div style="text-align: center; padding-top: 16px;">
+                <button mat-button style="width:100%" routerLink="/home/food-ingredients" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">restaurant</mat-icon>
+                  <p style="line-height:25pt ">จัดการวัตถุดิบ
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="user.department === 'พนักงานเสริฟ' || user.department === 'แคชเชียร์' || isAdmin" style="padding-top: 16px;">
+            <td>
+              <div style="text-align: center; padding-top: 16px;">
+                <button mat-button style="width:100%" routerLink="/home/table-management" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">view_comfy</mat-icon>
+                  <p style="line-height:25pt ">จัดการโต๊ะอาหาร
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="isAdmin">
+            <td>
+              <div style="text-align: center; padding-top: 16px;">
+                <button mat-button style="width:100%" routerLink="/home/restaurant-info" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">info</mat-icon>
+                  <p style="line-height:25pt ">ข้อมูลร้าน
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="isAdmin">
+            <td>
+              <div style="text-align: center; padding-top: 16px;">
+                <button mat-button style="width:100%" routerLink="/home/summary" routerLinkActive="active">
+                  <mat-icon class="paddingIcon" style="font-size: 35px">account_balance_wallet</mat-icon>
+                  <p style="line-height:25pt ">สรุปยอด
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav #noti id="style-2" mode="over" position="end">
+      <div id="style-2" style="background:#ececec; overflow: auto; height: 100%;">
+        <mat-card mat-ripple class="mat-card1 class.mat-elevation-z0" (click)="readNotification(noti)" style="padding:4px; margin-bottom: 0px; width: 100%; "
+          *ngFor="let noti of notificationRestaurant" [style.backgroundColor]="noti.read ? '#ececec' : '#d8d8d8'">
+          <!-- [style.backgroundColor] = "noti%2 == '0' ? '#d8d8d8':'#ffffff'"  -->
+          <!-- <mat-card-title>รอคิว</mat-card-title>
+          
+          <mat-card-content class="last-child">{{noti}}</mat-card-content> -->
+          <table style="width : 100%; ">
+            <tr>
+              <td rowspan="3" style="width:50px; text-align: center;">
+                <mat-icon style="width: 50px;height:50px; margin-right: 16px; margin-left: 8px; font-size: 50px; color: #3A6073;">{{noti.fromRestaurant
+                  ? "store" : "local_mall"}}</mat-icon>
+                <!--                 <img src="https://secure.i.telegraph.co.uk/multimedia/archive/03597/POTD_chick_3597497k.jpg" > -->
+              </td>
+              <td style="font-size :14px;">
+                {{noti.customerObj.firstName}} {{noti.customerObj.lastName}}
+              </td>
+              <td style="text-align: right; font-size :14px;" *ngIf="noti.orderObj.table != null">
+                โต๊ะ {{noti.orderObj.table}}
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="2" style="vertical-align: top;">
+                {{noti.message}} <div></div>
+                {{noti.orderObj.status}}
+              </td>
+              <td style="text-align: right;">
+                {{noti.date | date : 'dd/MM/yyyy'}}              
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align: right;">
+                {{noti.date | date : 'HH:mm'}} น.        
+              </td>
+            </tr>
+          </table>
+        </mat-card>
+      </div>
+
+
+    </mat-sidenav>
+
+    <mat-sidenav-content #concon id="style-2" style="background: rgb(243, 243, 243);" (click)="noti.close()">
+
+
+      <!-- <button mat-raised-button (click)="createSlideNotification()">text</button> -->
+
+      <simple-notifications></simple-notifications>
+
+
+      <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

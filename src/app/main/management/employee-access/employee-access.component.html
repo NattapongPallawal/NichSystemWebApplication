@@ -1,0 +1,36 @@
+<mat-card style="height: 95%; width: 70%;margin-top: 16px; margin-right: auto;margin-left: auto ;padding: 24px;">
+  <div class="w3-display-topright" style="margin:24px;">
+    <button mat-button color="primary" (click)="openDialogAddEmpDialog()">
+      <mat-icon color="primary">add</mat-icon>เพิ่มพนักงาน
+    </button> </div>
+  <div>
+    <p style="font-size: 20px"> พนักงาน</p>
+  </div>
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> #</th>
+      <td mat-cell *matCellDef="let element ;index as i;"> {{i+1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> ชื่อ </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="access">
+      <th mat-header-cell *matHeaderCellDef> สิทธิ์การใช้งาน </th>
+      <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> ลบ </th>
+      <td mat-cell *matCellDef="let element ;index as i;" style="text-align: center;">
+        <button mat-icon-button *ngIf="i >0">
+          <mat-icon style="color: #ff3333;" (click)="removeEmployee(i)">clear</mat-icon>
+        </button></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</mat-card>

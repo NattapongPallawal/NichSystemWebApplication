@@ -1,0 +1,11 @@
+table {
+    width: 60%;
+    margin: auto;
+  }
+  .example-container {
+    height: 80%;
+    margin:auto;
+    width: 60%;
+    overflow: auto;
+    
+  }

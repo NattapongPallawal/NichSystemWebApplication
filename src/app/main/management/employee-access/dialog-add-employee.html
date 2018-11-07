@@ -1,0 +1,78 @@
+
+<div style="font-size: 25px; text-align: center; margin-top: 8px;line-height: 40pt; position: relative;">
+    <strong style="font-size: 26px"> เพิ่มพนักงาน </strong>
+
+    <button mat-icon-button [mat-dialog-close]="true" style="position: absolute; right: 0%; top: auto; bottom: auto;">
+        <mat-icon style="color: #848484">close</mat-icon>
+    </button>
+
+</div>
+<br>
+<mat-progress-bar mode="indeterminate" *ngIf="isUploading" style="margin-bottom: 16px;"></mat-progress-bar>
+<form autocomplete="off" class="center" (submit)="onClickSignUp()" [formGroup]="form" style="text-align: center  ;width: 90%; margin: auto;">
+    <div>
+        <mat-form-field style="width: 100%;">
+            <input matInput placeholder="อีเมลล์" formControlName="email">
+        </mat-form-field>
+        <mat-form-field style="width: 50%;">
+            <input matInput placeholder="ชื่อ" formControlName="firstName">
+        </mat-form-field>
+
+        <mat-form-field style="width: 50%;">
+            <input matInput placeholder="นามสกุล" formControlName="lastName">
+        </mat-form-field>
+        <mat-form-field style="width: 91%;">
+            <mat-select placeholder="บทบาทพนักงาน" formControlName="access">
+                <mat-option *ngFor="let access of accesses" [value]="access.value">
+                    {{access.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;
+        <button type="button" mat-icon-button (click)="showInfoEmp()" >
+            <mat-icon style="color: gray;">info</mat-icon>
+        </button>
+        <div *ngIf="infoEmployee">
+            <table class="w3-table w3-bordered">
+                <tr>
+                    <td style="font-size: 13px; color: #4F4F4F">สิทธิ์การใช้งาน</td>
+                    <td style="font-size: 13px; color: #4F4F4F"> เมนูที่จะแสดงสำหรับพนักงาน </td>
+                </tr>
+                <tr>
+                    <td>
+                        พนักงานเสริฟ
+                    </td>
+                    <td>
+
+                        - เมนูเสริฟ<br>
+                        - เมนูข้อมูลส่วนตัวของพนักงาน
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        แคชเชียร์
+                    </td>
+                    <td>
+                        - เมนูการชำระเงิน<br>
+                        - เมนูสรุปยอด <br>
+                        - เมนูข้อมูลส่วนตัวของพนักงาน
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        พนักงานในครัว
+                    </td>
+                    <td>
+                        - เมนูออเดอร์ลูกค้า<br>
+                        - เมนูการจัดการวัตถุดิบ<br>
+                        - เมนูข้อมูลส่วนตัวของพนักงาน
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <button mat-raised-button type="submit" color="primary" [disabled] ="isUploading">
+            ลงทะเบียน
+        </button>
+    </div>
+</form>

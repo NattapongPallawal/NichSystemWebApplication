@@ -1,0 +1,61 @@
+<div style="text-align: center ;margin: 16px;font-size: 32px; font-weight: bold;">จัดการโต๊ะอาหาร</div>
+
+<table style="margin-left: 50px ">
+  <tr>
+    <td>
+      <mat-card style="width: 10px;height:10px; background-color:#56ab2f; ">
+      </mat-card>
+    </td>
+    <td>
+      ว่าง
+    </td>
+    <td>
+      <mat-card style="width: 25px;height:25px; background-color:#f64f59;">
+      </mat-card>
+    </td>
+    <td>
+      ไม่ว่าง
+    </td>
+    <td>
+      <p style="color: rgb(255, 113, 113) ;font-size: 14px; margin: auto;padding: 16px;">
+        **คลิกที่โต๊ะเพื่อสร้าง QR Code
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- *ngFor="let item of tableList | async" -->
+<div id="style-2" class="container-login100">
+  <mat-card *ngIf="cardAddTable" style="width: 150px;height: 150px; margin: 8px;">
+    <button mat-icon-button (click)="addTable()" style="position: absolute; right: 0%; top:0%; ">
+      <mat-icon style="color: #a7a7a7">close</mat-icon>
+    </button>
+    <mat-form-field style="width: 80px; text-align: center;">
+      <input matInput placeholder="เลขโต๊ะ" [(ngModel)]="table.tableName" style="text-align: center;" name="tableName">
+    </mat-form-field>
+    <button mat-icon-button (click)="add()" color="warn">
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </mat-card>
+  <mat-card mat-ripple  style="width: 150px;height: 150px; margin: 8px;text-align: center; color: white;"
+    *ngFor="let item of tableList" [style.background]="item.available ? '#56ab2f':'#f64f59'">
+    <button *ngIf="item.available" mat-icon-button (click)="removeTable(item)" style="position: absolute; right: 0%; top:0%; ">
+      <mat-icon style="color: #ffffff">close</mat-icon>
+    </button>
+    <div style="width: 100%; height: 100%;" (click)="showQRCode(item)">
+      <br><br>
+    <p> {{item.tableName}}</p>
+    </div>
+    
+
+
+
+
+  </mat-card>
+
+  <div style="margin: 50px; position: absolute; right: 0; bottom: 0px;">
+    <button mat-fab (click)="addTable()" color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

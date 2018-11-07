@@ -1,0 +1,74 @@
+
+    .example-container {
+        position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        
+        }.example-card {
+       
+          top: 10px;
+          left:22%;
+          bottom:50px;
+          width: 800px;
+          height: 650px;
+          text-align: center;
+        }  
+  
+        .img{
+  
+          height: 140px;
+        }
+     
+        /* .button {
+          text-align: center;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        
+        }
+   */
+        
+.table1{
+         
+          text-align: center;
+          border-collapse: collapse;
+          width: 100%;
+          margin: auto;
+          padding: 8px;
+         
+      }
+  
+      
+    /*   th, td {
+          width:100%;
+          padding: 8px;
+      } */
+
+      .example-full-width {
+        width: 100%;
+      }
+      .container-login100 {
+        width: 100%;  
+        height: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+      
+      }
+
+      .example-form {
+        min-width:50%;
+        max-width: 70%;
+        width: 100%;
+        text-align: center;
+        margin: auto;
+      }

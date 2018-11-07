@@ -1,0 +1,51 @@
+<!--<p style="text-align:center; font-size: 36px; ">ออเดอร์ลูกค้า</p>-->
+<!-- [style.backgroundColor]="onWaitQueue ? '#e7f3fd':'#FFFFFF'" -->
+<div style="width:433.33px; display: block;margin-left: auto;margin-right: auto;">
+  <mat-grid-list cols="2" rowHeight="4:3">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card mat-ripple class="mat-card1" 
+      [class.mat-elevation-z0]="!onWaitQueue" 
+      [class.mat-elevation-z5]="onWaitQueue"
+        style="text-align:center;width: 75%; height: 90%;" 
+        (click)="waitQueue()">
+        <mat-card-title>รอคิว</mat-card-title>
+        <mat-card-content class="last-child" style="color: red; font-size: 32px;">{{countWaitQueue}}</mat-card-content>
+      </mat-card>
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card mat-ripple class="mat-card1"
+      [class.mat-elevation-z0]="!onDoing" 
+      [class.mat-elevation-z5]="onDoing"
+       style=" text-align:center; width: 75%; height: 95%;" (click)="doing()">
+        <mat-card-title>กำลังทำ</mat-card-title>
+        <mat-card-content class="last-child" style="color: rgb(206, 206, 0); font-size: 32px;">{{countDoing}}</mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    
+  </mat-grid-list>
+</div>
+<br>
+<div  id="style-2" class = "scrollable" style="width:75%; display: block;margin-left: auto;margin-right: auto; ">
+  <mat-card mat-ripple style="margin-bottom:8px; padding: 8px;" *ngFor="let order of orders" (click)="openDialog(order)" >
+    <table>
+      <tr>
+        <td><img src="{{order.customer.picture}}" style="border-radius: 50%; width: 50px;height:50px; vertical-align:middle; margin-right: 16px; margin-left: 8px; object-fit: cover">
+        </td>
+        <td style="width:75%; padding-left: 16px; font-size: 24px;">
+          <p>ออเดอร์ที่ {{order.orderNumber}}</p>
+          <p #table *ngIf="order.fromRestaurant">โต๊ะที่ {{order.table}}</p>
+          <p>สถานะ <span style="color :brown;">{{order.status}}</span> </p>
+          <p #table *ngIf="!order.fromRestaurant">**ลูกค้าสั่งกลับบ้าน</p>
+        </td>
+        <td style="width:25%; text-align: center;">
+          <p style="padding: 4px;">{{order.totalMenu}} รายการ</p>
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+</div>
+<!--style="font-size: 24px;padding: 4px;"
+style="font-size: 24px;padding: 4px;"
+style="font-size: 24px;padding: 4px;"-->

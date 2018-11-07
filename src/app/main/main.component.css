@@ -1,0 +1,87 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  #style-2::-webkit-scrollbar-track
+{
+	/* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+/* 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3); */
+	background-color: rgba(43, 43, 43, 0.226);
+}
+  .example-is-mobile .example-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+
+  }
+  
+  h1.example-app-name {
+    margin-left: 8px;
+  }
+  
+  .example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+  }
+  
+  .example-is-mobile .example-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+  }
+  .paddingIcon{
+    margin-right: 16px;
+  }
+  .corrner{
+    border-radius: 50%;
+    width: 50px;
+    background: red;
+    height: 50px;
+    left: 25%;
+    right: 25%;
+    top: 25%;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .mat-card1:hover {
+    background:rgba(0,0,0,.04);
+  }
+  
+  .mat-card1 .last-child {
+    margin-bottom: 0;
+   
+  }
+ /*  .mat-card1:checked{
+    background: rebeccapurple;
+  }
+   */
+td{
+  font-size: 12px;
+}
+  
+.bg{
+  background: #232526;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   
+}

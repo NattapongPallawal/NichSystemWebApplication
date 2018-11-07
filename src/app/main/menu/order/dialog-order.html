@@ -1,0 +1,103 @@
+<div style="font-size: 25px; text-align: center; margin-top: 8px;line-height: 40pt; position: relative;">
+    <strong style="font-size: 26px"> ออเดอร์ลูกค้า </strong>
+
+    <button mat-icon-button [mat-dialog-close]="true" style="position: absolute; right: 0%; top: auto; bottom: auto;">
+        <mat-icon style="color: #848484">close</mat-icon>
+    </button>
+
+</div>
+
+<div>
+    <table>
+        <tr>
+            <td style="width: 116px;">
+                <img src="{{order.customer.picture}}" style="border-radius: 5%; width: 100px;height: 100px; object-fit: cover">
+            </td>
+            <td>
+                <p> ออร์เดอร์ที่ {{order.orderNumber}} </p>
+                <p style="float: right;margin-right: 20px" *ngIf="order.table != null"> โต๊ะที่ {{order.table}} </p>
+                <p> จาก {{order.customer.firstName}} {{order.customer.lastName}} </p>
+                <p> สถานะออเดอร์ <span style="color: red;">{{order.status}}</span> </p>
+                <p> เวลาที่สั่ง {{order.date | date : 'dd/MM/yyyy HH:mm:ss'}} น.</p> <!--  | date:'dd/MM/"yyyy+543" HH:mm น.' -->
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+<br>
+<mat-dialog-content class="mat-typography">
+
+    <div class="example-container "   id="style-2" >
+        <table mat-table [dataSource]="dataSource"  >
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+                <td mat-cell *matCellDef="let element ;index as i;"> {{i+1}} </td> first as isFirst
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="menu">
+                <th mat-header-cell *matHeaderCellDef> เมนู </th>
+                <td mat-cell *matCellDef="let element ;index as i; "> {{element.foodName}} {{menus[i].foodTypeName}}
+                </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="size">
+                <th mat-header-cell *matHeaderCellDef> ขนาด </th>
+                <td mat-cell *matCellDef="let element"> {{element.foodSizeName}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> จำนวน </th>
+                <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="finish">
+                <th mat-header-cell *matHeaderCellDef style="width:30px;  text-align: center;">
+                    <button mat-icon-button #tooltip="matTooltip" matTooltip="เสร็จแล้วทั้งหมด" matTooltipPosition="right"
+                    aria-tooltip="Button that displays and hides a tooltip triggered by other buttons" style=" text-align: center;" color="warn" (click)="doneAll()" [disabled]="isAllDone">
+                        <mat-icon [style.color] = "isAllDone ? 'green':'red'" >done_all</mat-icon>
+                    </button>
+                </th>
+                <td mat-cell *matCellDef="let element" style=" text-align: center;">
+                    <button mat-icon-button style=" text-align: center;" color="warn" (click)="foodDone(element)"
+                        [disabled]="element.finish">
+                        <mat-icon [style.color] = "element.finish ? 'green':'red'">done</mat-icon>
+                    </button>
+
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <!-- isLarge ? 'video.large' : 'video.small' -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="isDoing ? '' :'selection.toggle(row)'"></tr>
+        </table>
+        
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end" style="margin-right:16px; margin-bottom: 2px;">
+   
+
+    <button mat-flat-button color="warn" class="buttonconfirm" (click)="getOrder()" *ngIf="order.status === 'รอรับออเดอร์'">รับออเดอร์</button>
+    <button mat-flat-button color="warn" *ngIf="isDoing" 
+        (click)="onClickServe()" >เสร็จเรียบร้อย</button>
+
+</mat-dialog-actions>

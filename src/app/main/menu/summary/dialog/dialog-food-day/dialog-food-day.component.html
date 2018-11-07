@@ -1,0 +1,25 @@
+<div style="font-size: 26px;text-align: center">สรุปรายการอาหารยอดนิยมประจำวัน
+ <br> 19/25/2031 (date now)</div>
+
+<table mat-table [dataSource]="dataSource" style="width: 100%;text-align: center" >
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nameFood" style="text-align: center">
+    <th mat-header-cell *matHeaderCellDef> เมนู </th>
+    <td mat-cell *matCellDef="let element"> {{element.nameFood}} </td>
+  </ng-container>
+
+  
+  <ng-container matColumnDef="amountMenu">
+    <th mat-header-cell *matHeaderCellDef> จำนวนครั้งที่ถูกสั่ง </th>
+    <td mat-cell *matCellDef="let element"> {{element.amountMenu}} </td>
+  </ng-container>
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

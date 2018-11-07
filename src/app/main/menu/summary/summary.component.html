@@ -1,0 +1,32 @@
+
+<div style="font-size: 26px;  text-align: center;"> สรุปยอดร้าน </div>
+
+<table style="width: 100%;text-align: center">
+  <tr>
+    <td style="width: 50%;">
+      <div  id="chartOfDay" style="height:300px; width:100%; "></div>
+      <button *ngIf="false" mat-raised-button (click)="foodDayDialog()" style="margin: 16px">แสดงรายละเอียด</button>
+      
+    </td>
+    <td style="width: 50%;">
+      <div id="chartOfMonth" style="height:300px; width: 100%;"></div>
+      <button *ngIf="false" mat-raised-button (click)="foodMonthDialog()" style="margin: 16px">แสดงรายละเอียด</button>
+    </td>
+  </tr>
+  <tr style="padding: 18px;text-align: center">
+    <td colspan="2" style="text-align: center;padding: 18px">
+      <div *ngIf="menuAmountNow.length != 0" style="font-size: 26px;  text-align: center;"> สรุปยอดขายประจำสัปดาห์ </div>
+        <div  id="chartColumOfDay" style="height: 300px; width:60%; display: block; margin: auto;"></div>
+        <button *ngIf="false"  mat-raised-button (click)="moneyDayDialog()" style="margin-top: 16px">แสดงรายละเอียด</button>
+    </td>
+   
+  </tr>
+  <tr *ngIf="false" style="padding: 18px;text-align: center">
+    <td colspan="2" style="text-align: center;padding: 18px">
+      <div style="font-size: 26px;  text-align: center;"> สรุปยอดขายประจำเดือน </div>
+        <div  id="chartColumOfMonth" style="height: 300px; width:60%; display: block;margin: auto;"></div>
+         <button *ngIf="false" mat-raised-button (click)="moneyMonthDialog()" style="margin-top: 16px">แสดงรายละเอียด</button>
+    </td>
+    
+    
+</table>

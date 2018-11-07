@@ -1,0 +1,154 @@
+<table style="width: 100%; height: 100%; text-align: center;">
+  <tr style="height: 15%;">
+    <td>
+      <table style="width:95%; margin-left: auto;margin-right: auto;">
+        <tr style="width: 80%;">
+          <td style="padding-right: 16px">
+            <mat-card mat-ripple style="margin-right: 16px;width:100%;background-color: #CD6155   ">
+              <table style="width: 100%; text-align: center">
+                <tr style="width: 80%;">
+                  <td rowspan="2">
+                    <mat-icon style="font-size: 50px; color: white">shopping_cart </mat-icon>
+                  </td>
+                  <td>
+                    <strong>
+                      <div style="font-size: 36px;color: white;">{{orderWaiting.length}}</div>
+                    </strong>
+                  </td>
+                </tr>
+                <tr style="width: 80%;">
+                  <td>
+                    <div style="color: #FFF;"> ออเดอร์ใหม่</div>
+                  </td>
+                </tr>
+              </table>
+            </mat-card>
+          </td>
+          <td style="padding-right: 16px">
+            <mat-card mat-ripple style="margin-right: 16px;width:100%;background-color: #AF7AC5   ">
+
+              <table style="width: 100%; text-align: center">
+                <tr style="width: 100%;">
+                  <td rowspan="2" style="padding-right: 16px;">
+                    <mat-icon style="font-size: 50px; color: white">send</mat-icon>
+                  </td>
+                  <td>
+                    <strong>
+                      <div style="font-size: 36px;color: white;"> {{orderServe.length}} </div>
+                    </strong>
+                  </td>
+                </tr>
+                <tr style="width: 100%;">
+                  <td>
+                    <div style="color: #FFF;"> รอเสริฟ</div>
+                  </td>
+                </tr>
+              </table>
+            </mat-card>
+
+          </td>
+          <td style="padding-right: 16px">
+            <mat-card mat-ripple style="margin-right: 16px;width:100%;background-color: #5499C7  ">
+
+              <table style="width: 100%; text-align: center">
+                <tr style="width: 100%;">
+                  <td rowspan="2" style="padding-right: 16px;">
+                    <mat-icon style="font-size: 50px; color: white; ">payment</mat-icon>
+                  </td>
+                  <td>
+                    <strong>
+                      <div style="font-size: 36px;color: white;"> {{orderPayment.length}} </div>
+                    </strong>
+                  </td>
+                </tr>
+                <tr style="width: 100%;">
+                  <td>
+                    <div style="color: #FFF;"> รอชำระเงิน</div>
+                  </td>
+                </tr>
+              </table>
+            </mat-card>
+
+
+          </td>
+          <td style="padding-right: 16px">
+            <mat-card mat-ripple style="margin-right: 16px;width:100%;background-color: #45B39D  ">
+
+              <table style="width: 100%; text-align: center">
+                <tr style="width: 100%;">
+                  <td rowspan="2" style="padding-right: 16px;">
+                    <mat-icon style="font-size: 50px; color: white; ">event_seat</mat-icon>
+                  </td>
+                  <td>
+                    <strong>
+                      <div style="font-size: 36px;color: white;"> {{table.length}}</div>
+                    </strong>
+                  </td>
+                </tr>
+                <tr style="width: 100%;">
+                  <td>
+                    <div style="color: #FFF;"> โต๊ะว่าง !</div>
+                  </td>
+                </tr>
+              </table>
+            </mat-card>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td style="width:30%; height:100%; vertical-align: top; " rowspan="2">
+      <div style="margin-left: 0px; margin-right: 8px; margin-top: 4px; height: 95%;width:95%;">
+        <mat-card style="height: 100%;text-align: left;" class="class.mat-elevation-z5">
+          <mat-card-header>
+            <mat-card-title>ความคิดเห็นจากลูกค้า</mat-card-title>
+            <mat-card-subtitle>{{feedback.length}} ความคิดเห็น</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div id="style-2" style="height: 550px;  overflow: auto; ">
+
+
+              <mat-card *ngFor="let item of feedback" class="class.mat-elevation-z0" style="background-color: rgb(100, 184, 226); margin: 8px; color: white;">
+                <mat-card-header>
+                  <div mat-card-avatar [style.background-image]="'url('+ item.cusObj.picture +')'" class="example-header-image"></div>
+                  <mat-card-title>{{item.cusObj.firstName}} {{item.cusObj.lastName}}</mat-card-title>
+                  <mat-card-subtitle style="color: whitesmoke;"> {{item.date | date : 'dd/MM/yyyy HH:mm'}} น.</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <span style="font-weight: bold;">{{item.title}}</span> {{item.comment}}
+                </mat-card-content>
+              </mat-card>
+
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+
+    </td>
+  </tr>
+  <tr>
+    <td style="width:70%; text-align: center; vertical-align: top;">
+      <mat-card class="class.mat-elevation-z0" style="width: 95%; text-align: center; margin: 16px;">
+        <mat-card-header style="text-align: left ;">
+          <mat-card-title>เมนูอาหารยอดนิยม</mat-card-title>
+          <mat-card-subtitle>คะแนนร้านอาหาร {{restaurantRating | number :'1.2-2'}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content style="width:100%" class="container-login100">
+
+          <mat-card *ngFor="let menu of menus" style="text-align: left; width: 25%" class="class.mat-elevation-z0">
+            <mat-card-header>
+              <mat-card-title>{{menu.foodName}}</mat-card-title>
+              <mat-card-subtitle>{{menu.orderAmount}} ออเดอร์</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <img style="height:100%; width:100%;  border-radius:5px;" src={{menu.picture}}>
+
+            </mat-card-content>
+          </mat-card>
+
+        </mat-card-content>
+      </mat-card>
+    </td>
+
+  </tr>
+</table>

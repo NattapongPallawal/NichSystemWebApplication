@@ -1,0 +1,23 @@
+<div class="container-login100">
+  <mat-card class="class.mat-elevation-z0" style="border-radius: 10px;text-align: center; width: 50%;height: 80%;">
+    <div style="padding: 16px; color: #0F2027; font-weight: bold; font-size: 22px;">
+      <p style="font-size: 30px;">สวัสดี! {{userInfo.firstName}}</p>
+      <p >กรุณาเลือกร้านอาหารของคุณ</p>
+    </div>
+    
+    <br>
+    <div id="style-2" style="margin: auto; overflow: auto; height: 80%; width: 60%">
+      <!--   -->
+      <mat-card class="class.mat-elevation-z0 bgRes" style="color: white; border-radius: 50px; cursor: pointer;text-align: center;margin: 8px;"
+        mat-ripple *ngFor="let res of restaurant" (click)="gotoDashbord(res.key)">
+        <p>{{res.restaurantName}}</p>
+      </mat-card>
+
+      <mat-card (click)="openDialog()" class="class.mat-elevation-z0 " style="padding: 0px;padding-top: 8px; border-radius: 10px; cursor: pointer;text-align: center;margin: 8px;"
+        mat-ripple>
+        <mat-icon style="font-size: 50px; margin: auto; color: #0F2027;">add_circle_outline</mat-icon>
+      </mat-card>
+    </div>
+  </mat-card>
+
+</div>
